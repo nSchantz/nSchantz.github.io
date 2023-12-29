@@ -1,0 +1,57 @@
+body {
+  background-color: black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.main-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-image img {
+  max-width: 8%;
+  height: auto;
+  border: none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a, a:hover, a:visited, a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+footer {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  vertical-align: middle;
+
+}
+
+.resume-list h5 {
+  display: inline-block;
+}
+
+.back-btn a {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 10px;
+}
+
+
+
