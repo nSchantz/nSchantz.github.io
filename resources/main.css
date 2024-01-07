@@ -9,28 +9,6 @@ body {
   margin: 0;
 }
 
-.main-image {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.main-image img {
-  max-width: 8%;
-  height: auto;
-  border: none;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-a, a:hover, a:visited, a:active {
-  text-decoration: none;
-  color: inherit;
-}
-
 footer {
   display: flex;
   text-align: center;
@@ -43,8 +21,27 @@ footer {
   font-size: 11px;
 }
 
-.resume-list h5 {
-  display: inline-block;
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+a, a:hover, a:visited, a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+.main-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-image img {
+  max-width: 8%;
+  /*max-width: 50%; chimera*/
+  height: auto;
+  border: none;
 }
 
 .back-btn a {
