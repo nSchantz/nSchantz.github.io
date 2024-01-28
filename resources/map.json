@@ -1,0 +1,20 @@
+{
+"markers":[
+	{
+		"id":1,
+		"type":"video",
+		"tag":"2023-Trip",
+		"state":"GA",
+		"pos":[41.77, -72.69],
+		"url":"https://www.youtube.com/watch?v=tqNBM--FZGg"
+	},
+	{
+		"id":2,
+		"type":"video",
+		"tag":"2023-Trip",
+		"state":"GA",
+		"pos":[31.77, -80.69],
+		"url":"https://www.youtube.com/embed/tgbNymZ7vqY"
+	}
+]
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Travel - Nicholas Schantz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+
+  <!-- Load Leaflet code library: see https://leafletjs.com/download.html -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <!-- Position the map and title with Cascading Style Sheet (CSS) -->
+  <style>
+    body { margin:0; padding:0; }
+    #map { position: absolute; top:0; bottom:0; right:0; left:0; }
+    #map-title { position: relative; margin-top: 10px; margin-left: 50px; float: left; background: white; border: 2px solid rgba(0,0,0,0.2); padding: 6px 8px; font-family: Helvetica; font-weight: bold; font-size: 24px; z-index: 800; }
+  </style>
+</head>
+<body>
+
+  <div id="map-title">Travel</div>
+  <div id="map"></div>
+
+  <script type="module">  
+    // Get Data from map.json
+    fetch('../resources/map.json')
+      .then((response) => response.json())
+      .then((json) => init_map(json));
+  
+    // Initialize Leaflet Map
+    function init_map(json) {
+      /* Set up the initial map center and zoom level */
+      var map = L.map('map', {
+        center: [41.77, -72.69],
+        zoom: 7,
+        scrollWheelZoom: true
+      });
+
+      /* Display basemap tiles -- see others at https://leaflet-extras.github.io/leaflet-providers/preview/ */
+      L.tileLayer(
+        'https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}{r}.{ext}', {
+          minZoom: 0,
+          maxZoom: 20,
+          attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a>\
+           &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a>\
+           &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a>\
+           &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+          ext: 'png'
+      }).addTo(map);
+
+      var popupOptions =
+      {
+        'maxWidth': '400',
+        'width': '200',
+        'className': 'popupVideo'
+      }
+
+      // Display Markers
+      for (const marker of json.markers) {
+        if (marker.type === "video") {
+          var popupData = `Trip: ${marker.tag}<br>\
+                           State: ${marker.state}<br>\
+                           Estimated Position: ${marker.pos}`;
+          var popupVideo = `<iframe width="320" height="240"\
+                              src="${marker.url}">\
+                            </iframe>`
+          var popup = popupData + '<br>' + popupVideo;
+        }
+
+        L.marker(marker.pos).addTo(map)
+        .bindPopup(popup, popupOptions);
+      }
+    }  
+</script>
+</body>
+</html>
