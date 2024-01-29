@@ -9,27 +9,32 @@
 
 <url>
   <loc>https://schantz.dev/</loc>
-  <lastmod>2024-01-07T06:30:37+00:00</lastmod>
+  <lastmod>2024-01-28T23:57:10+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://schantz.dev/pages/about</loc>
-  <lastmod>2024-01-07T06:30:37+00:00</lastmod>
+  <lastmod>2024-01-28T23:57:10+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://schantz.dev/pages/resume</loc>
-  <lastmod>2024-01-07T06:30:37+00:00</lastmod>
+  <lastmod>2024-01-28T23:57:10+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://schantz.dev/pages/projects</loc>
-  <lastmod>2024-01-07T06:30:37+00:00</lastmod>
+  <lastmod>2024-01-28T23:57:10+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://schantz.dev/pages/writeups</loc>
-  <lastmod>2024-01-07T06:30:37+00:00</lastmod>
+  <lastmod>2024-01-28T23:57:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://schantz.dev/pages/map</loc>
+  <lastmod>2024-01-28T23:57:10+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 
