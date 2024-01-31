@@ -35,8 +35,8 @@
     function init_map() {
       /* Set up the initial map center and zoom level */
       var map = L.map('map', {
-        center: [41.77, -72.69],
-        zoom: 7,
+        center: [37.090240, -95.712891],
+        zoom: 4,
         scrollWheelZoom: true
       });
 
@@ -75,14 +75,14 @@
       for (const marker of json.markers) {
         if (type === "video") {
           var popupData = `Trip: ${marker.tag}<br>\
-                           Estimated Position: ${marker.pos}`;
+                           Estimated Position: [${marker.lat}, ${marker.long}]`;
           var popupVideo = `<iframe width="600" height="450"\
                               src="${marker.url}">\
                             </iframe>`
           var popupId   = `ID: ${marker.id}`
           var popup = popupData + '<br>' + popupVideo + '<br>' + popupId;
 
-          L.marker([marker.lat, (marker.long * -1)], {icon: imgIcon}).addTo(map)
+          L.marker([marker.lat, marker.long], {icon: vidIcon}).addTo(map)
           .bindPopup(popup, popupOptions);
         } else if (type === "image") {
           var popupData = `Trip: ${marker.tag}<br>\

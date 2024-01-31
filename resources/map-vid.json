@@ -1,16 +1,11 @@
 {
-"markers":[
-	{
-		"id":1,
-		"tag":"2023-Trip",
-		"pos":[41.77, 72.69],
-		"url":"https://www.youtube.com/watch?v=tqNBM--FZGg"
-	},
-	{
-		"id":2,
-		"tag":"2023-Trip",
-		"pos":[31.77, 80.69],
-		"url":"https://www.youtube.com/embed/tgbNymZ7vqY"
-	}
-]
+  "markers": [
+    {
+      "id": "3edcee1921941a50149d9ea296655fc0750cfea05c5e98c0cffadc92949679d9",
+      "tag": "2023-Cross-Country-Trip",
+      "long": -111.3913527,
+      "lat": 35.1955469,     
+      "url": "https://www.youtube.com/embed/ZAADby7nakM"
+    }
+  ]
 }
