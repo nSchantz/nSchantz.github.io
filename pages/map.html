@@ -54,9 +54,9 @@
     function init_map_data(map, type, json) {
       var popupOptions =
       {
-        'maxWidth': '400',
-        'width': '200',
-        'className': 'popupVideo'
+        'maxWidth': '600',
+        'width': '300',
+        'className': 'popup'
       }
 
       var imgIcon = L.icon({
@@ -74,7 +74,7 @@
         if (type === "video") {
           var popupData = `Trip: ${marker.tag}<br>\
                            Estimated Position: ${marker.pos}`;
-          var popupVideo = `<iframe width="320" height="240"\
+          var popupVideo = `<iframe width="600" height="450"\
                               src="${marker.url}">\
                             </iframe>`
           var popupId   = `ID: ${marker.id}`
@@ -85,9 +85,11 @@
         } else if (type === "image") {
           var popupData = `Trip: ${marker.tag}<br>\
                            Exact Position: [${marker.lat}, ${marker.long}] `;
-          var popupImg  = `<img width="320" height="240"\
+          var popupImg  = `<a href="${marker.url}">\
+                           <img width="600" height="450"\
                               src="${marker.url}">\
-                           </img>`
+                           </img>
+                           </a>`
           var popupId   = `ID: ${marker.id}`
           var popup = popupData + '<br>' + popupImg + '<br>' + popupId;
 
