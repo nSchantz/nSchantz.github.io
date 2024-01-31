@@ -28,13 +28,9 @@
   <div id="map"></div>
 
   <script type="module">  
-    // Get Data from map.json
-    fetch('../resources/map.json')
-      .then((response) => response.json())
-      .then((json) => init_map(json));
-  
+
     // Initialize Leaflet Map
-    function init_map(json) {
+    function init_map() {
       /* Set up the initial map center and zoom level */
       var map = L.map('map', {
         center: [41.77, -72.69],
@@ -51,6 +47,11 @@
           ext: 'png'
       }).addTo(map);
 
+      return map;
+    }
+
+    // Initialize Leaflet Map
+    function init_map_data(map, type, json) {
       var popupOptions =
       {
         'maxWidth': '400',
@@ -60,20 +61,42 @@
 
       // Display Markers
       for (const marker of json.markers) {
-        if (marker.type === "video") {
+        if (type === "video") {
           var popupData = `Trip: ${marker.tag}<br>\
-                           State: ${marker.state}<br>\
                            Estimated Position: ${marker.pos}`;
           var popupVideo = `<iframe width="320" height="240"\
                               src="${marker.url}">\
                             </iframe>`
-          var popup = popupData + '<br>' + popupVideo;
+          var popupId   = `ID: ${marker.id}`
+          var popup = popupData + '<br>' + popupVideo + '<br>' + popupId;
+        } else if (type === "image") {
+          var popupData = `Trip: ${marker.tag}<br>\
+                           Exact Position: [${marker.lat}, ${marker.long}] `;
+          var popupImg  = `<img width="320" height="240"\
+                              src="${marker.url}">\
+                           </img>`
+          var popupId   = `ID: ${marker.id}`
+          var popup = popupData + '<br>' + popupImg + '<br>' + popupId;
         }
 
-        L.marker(marker.pos).addTo(map)
+        L.marker([marker.lat, (marker.long * -1)]).addTo(map)
         .bindPopup(popup, popupOptions);
+        
+        console.log(`Added ${type}: ${marker.id}`)
       }
-    }  
-</script>
+    }
+
+    var map = init_map()
+  
+    // Get Images from map-img.json
+    fetch('/resources/map-img.json')
+      .then((response) => response.json())
+      .then((json) => init_map_data(map, "image", json));
+
+    fetch('/resources/map-vid.json')
+      .then((response) => response.json())
+      .then((json) => init_map_data(map, "video", json));
+  
+  </script>
 </body>
 </html>
