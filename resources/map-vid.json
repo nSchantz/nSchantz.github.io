@@ -3,20 +3,14 @@
 	{
 		"id":1,
 		"tag":"2023-Trip",
-		"pos":[41.77, -72.69],
+		"pos":[41.77, 72.69],
 		"url":"https://www.youtube.com/watch?v=tqNBM--FZGg"
 	},
 	{
 		"id":2,
 		"tag":"2023-Trip",
-		"pos":[31.77, -80.69],
+		"pos":[31.77, 80.69],
 		"url":"https://www.youtube.com/embed/tgbNymZ7vqY"
-	},
-	{
-	  "id":3,
-		"tag":"2023-Trip",
-		"pos":[33, -78],
-		"url":"/resources/images/test1.jpg"		
 	}
 ]
 }
