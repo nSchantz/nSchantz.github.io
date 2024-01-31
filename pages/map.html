@@ -59,6 +59,16 @@
         'className': 'popupVideo'
       }
 
+      var imgIcon = L.icon({
+        iconUrl: "/resources/icons/camera-black.svg",
+        iconSize: [54, 54]
+      });
+
+      var vidIcon = L.icon({
+        iconUrl: "/resources/icons/video-black.svg",
+        iconSize: [54, 54]
+      })
+
       // Display Markers
       for (const marker of json.markers) {
         if (type === "video") {
@@ -69,6 +79,9 @@
                             </iframe>`
           var popupId   = `ID: ${marker.id}`
           var popup = popupData + '<br>' + popupVideo + '<br>' + popupId;
+
+          L.marker([marker.lat, (marker.long * -1)], {icon: imgIcon}).addTo(map)
+          .bindPopup(popup, popupOptions);
         } else if (type === "image") {
           var popupData = `Trip: ${marker.tag}<br>\
                            Exact Position: [${marker.lat}, ${marker.long}] `;
@@ -77,10 +90,10 @@
                            </img>`
           var popupId   = `ID: ${marker.id}`
           var popup = popupData + '<br>' + popupImg + '<br>' + popupId;
-        }
 
-        L.marker([marker.lat, (marker.long * -1)]).addTo(map)
-        .bindPopup(popup, popupOptions);
+          L.marker([marker.lat, (marker.long * -1)], {icon: imgIcon}).addTo(map)
+          .bindPopup(popup, popupOptions); 
+        }
         
         console.log(`Added ${type}: ${marker.id}`)
       }
