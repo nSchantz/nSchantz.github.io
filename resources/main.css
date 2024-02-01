@@ -51,13 +51,16 @@ a, a:hover, a:visited, a:active {
   margin: 10px;
 }
 
-.back-btn .underline a {
-  display: inline;
-}
-
 .back-btn span {
   position: absolute;
   top: 0;
+  right: 0;
+  margin: 10px;
+}
+
+.map-header span {
+  position: absolute;
+  top: 30px;
   right: 0;
   margin: 10px;
 }

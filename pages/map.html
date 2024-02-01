@@ -14,7 +14,7 @@
   <!-- Position the map and title with Cascading Style Sheet (CSS) -->
   <style>
     body { margin:0; padding:0; background: black; }
-    #map { position: absolute; top:35px; bottom:0; right:0; left:0; }
+    #map { position: absolute; top:70px; bottom:0; right:0; left:0; }
     #map-title { position: relative; margin-top: 10px; margin-left: 50px; float: left; background: white; border: 2px solid rgba(0,0,0,0.2); padding: 6px 8px; font-family: Helvetica; font-weight: bold; font-size: 24px; z-index: 800; }
   </style>
 </head>
@@ -22,38 +22,40 @@
 
   <div class="back-btn">
     <a href="/">back</a>
-    <!--<span style="right: 0">Thanks to Reshot (Icons) & Leaflet/OpenSourceMaps (Map Library/Map). Check out my source (https://github.com/nSchantz/nSchantz.github.io) and script (https://github.com/nSchantz/file2map) for automating image/video upload.</span>
-    -->
+    <span style="right: 0">Thanks to Reshot for the icons & Leaflet/OpenStreetMap for the map library/map.</span>
+  </div>
+
+  <div class ="map-header">
+    <span> Interested in creating something like this? Check out my site's <a style="text-decoration: underline" href="https://github.com/nSchantz/nSchantz.github.io" target="_blank" rel="noopener noreferrer">source</a> and <a style="text-decoration: underline" href="https://github.com/nSchantz/file2map" target="_blank" rel="noopener noreferrer">tooling</a> for automating the picture/video upload process.</span>
   </div>
    
-  <!-- <div id="map-title">Travel</div> -->
   <div id="map"></div>
-
   <script type="module">  
 
     // Initialize Leaflet Map
     function init_map() {
-      /* Set up the initial map center and zoom level */
-      var map = L.map('map', {
-        center: [37.090240, -95.712891],
-        zoom: 4,
-        scrollWheelZoom: true
-      });
-
       /* Display basemap tiles -- see others at https://leaflet-extras.github.io/leaflet-providers/preview/ */
-      L.tileLayer(
+      var baseLayer = L.tileLayer(
         'https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
           minZoom: 0,
           maxZoom: 20,
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
           ext: 'png'
-      }).addTo(map);
+      });
 
-      return map;
+      /* Set up the initial map center and zoom level */
+      var map = L.map('map', {
+        center: [37.090240, -95.712891],
+        zoom: 4,
+        scrollWheelZoom: true,
+        layers: [baseLayer]
+      });
+
+      return [map, baseLayer];
     }
 
     // Initialize Leaflet Map
-    function init_map_data(map, type, json) {
+    function init_map_data(map, type, json, layerControl) {
       var popupOptions =
       {
         'maxWidth': '600',
@@ -71,7 +73,8 @@
         iconSize: [54, 54]
       })
 
-      // Display Markers
+      // Add Markers to Layers
+      var markerGroup = [];
       for (const marker of json.markers) {
         if (type === "video") {
           var popupData = `Trip: ${marker.tag}<br>\
@@ -82,8 +85,8 @@
           var popupId   = `ID: ${marker.id}`
           var popup = popupData + '<br>' + popupVideo + '<br>' + popupId;
 
-          L.marker([marker.lat, marker.long], {icon: vidIcon}).addTo(map)
-          .bindPopup(popup, popupOptions);
+          var currMarker = L.marker([marker.lat, marker.long], {icon: vidIcon}).bindPopup(popup, popupOptions);
+          markerGroup.push(currMarker);
         } else if (type === "image") {
           var popupData = `Trip: ${marker.tag}<br>\
                            Exact Position: [${marker.lat}, ${marker.long}] `;
@@ -95,25 +98,41 @@
           var popupId   = `ID: ${marker.id}`
           var popup = popupData + '<br>' + popupImg + '<br>' + popupId;
 
-          L.marker([marker.lat, (marker.long * -1)], {icon: imgIcon}).addTo(map)
-          .bindPopup(popup, popupOptions); 
+          var currMarker = L.marker([marker.lat, (marker.long * -1)], {icon: imgIcon}).bindPopup(popup, popupOptions);
+          markerGroup.push(currMarker);
         }
-        
-        console.log(`Added ${type}: ${marker.id}`)
       }
+
+      // Add groups of videos/images to respective layer group.
+      var layer = L.layerGroup(markerGroup);
+
+      // Add this group as an overlay to layer control.
+      layerControl.addOverlay(layer, type);
+
+      // Add the layer to the map so it defaults on when loading the page.
+      layer.addTo(map)
     }
 
-    var map = init_map()
+    // Create map
+    var [map, baseLayer] = init_map()
+
+    var baseLayers = {
+      "Map": baseLayer
+    };
+
+    // Setup layer control
+    var layerControl = L.control.layers(baseLayers).addTo(map);
   
     // Get Images from map-img.json
     fetch('/resources/map-img.json')
       .then((response) => response.json())
-      .then((json) => init_map_data(map, "image", json));
+      .then((json) => init_map_data(map, "image", json, layerControl));
 
+    // Get Videos from map-vid.json
     fetch('/resources/map-vid.json')
       .then((response) => response.json())
-      .then((json) => init_map_data(map, "video", json));
-  
+      .then((json) => init_map_data(map, "video", json, layerControl));
+
   </script>
 </body>
 </html>
