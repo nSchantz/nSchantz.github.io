@@ -54,6 +54,32 @@
       return [map, baseLayer];
     }
 
+    function get_icon(tag, type) {
+
+      var iurl = "/resources/icons/camera-black.svg";
+
+      if (tag === "2023-Cross-Country-Trip") {
+        if (type === "image") {
+          iurl = "/resources/icons/camera-black.svg";
+        } else if (type === "video") {
+          iurl = "/resources/icons/video-black.svg";
+        }
+      } else if (tag === "2024-Iceland-Trip") {
+        if (type === "image") {
+          iurl = "/resources/icons/camera-blue.svg";
+        } else if (type === "video") {
+          iurl = "/resources/icons/video-blue.svg";
+        }
+      }
+
+      var icon = L.icon({
+        iconUrl: iurl,
+        iconSize: [54, 54]
+      });
+
+      return icon;
+    }
+
     // Initialize Leaflet Map
     function init_map_data(map, type, json, layerControl) {
       var popupOptions =
@@ -63,16 +89,6 @@
         'className': 'popup',
         'autoPan': false
       }
-
-      var imgIcon = L.icon({
-        iconUrl: "/resources/icons/camera-black.svg",
-        iconSize: [54, 54]
-      });
-
-      var vidIcon = L.icon({
-        iconUrl: "/resources/icons/video-black.svg",
-        iconSize: [54, 54]
-      })
 
       // Add Markers to Layers
       var markerGroup = [];
@@ -86,7 +102,7 @@
           var popupId   = `ID: ${marker.id}`
           var popup = popupData + '<br>' + popupVideo + '<br>' + popupId;
 
-          var currMarker = L.marker([marker.lat, marker.long], {icon: vidIcon}).bindPopup(popup, popupOptions);
+          var currMarker = L.marker([marker.lat, marker.long], {icon: get_icon(marker.tag, type)}).bindPopup(popup, popupOptions);
           markerGroup.push(currMarker);
         } else if (type === "image") {
           var popupData = `Trip: ${marker.tag}<br>\
@@ -99,7 +115,7 @@
           var popupId   = `ID: ${marker.id}`
           var popup = popupData + '<br>' + popupImg + '<br>' + popupId;
 
-          var currMarker = L.marker([marker.lat, (marker.long * -1)], {icon: imgIcon}).bindPopup(popup, popupOptions);
+          var currMarker = L.marker([marker.lat, (marker.long * -1)], {icon: get_icon(marker.tag, type)}).bindPopup(popup, popupOptions);
           markerGroup.push(currMarker);
         }
       }
