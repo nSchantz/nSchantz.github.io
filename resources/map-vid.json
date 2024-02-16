@@ -76,6 +76,27 @@
       "long": -123.852821,
       "lat": 46.1878,
       "url": "https://www.youtube.com/embed/78w1nQKhS_c"
+    },
+    {
+      "id": "47cc57f8bfeb9fbd2959d4b186b18d3c277d81cfa24f958ce674ed21b54f05a1",
+      "tag": "2023-Cross-Country-Trip",
+      "long": -124.359058,
+      "lat": 42.158968,
+      "url": "https://www.youtube.com/embed/B3qteTacIXc"
+    },
+    {
+      "id": "b412e8da4a6324facf75fe82cd2fd03e9b6d3d00398a9acedc8248cd20dfd087",
+      "tag": "2023-Cross-Country-Trip",
+      "long": -88.265185,
+      "lat": 32.55558,
+      "url": "https://www.youtube.com/embed/jPg8fJi3DdI"
+    },
+    {
+      "id": "f768301ff1b930ee9035711abcd0adaecbd3d76c34d55e6db010aede71928786",
+      "tag": "2023-Cross-Country-Trip",
+      "long": -118.077895,
+      "lat": 35.028353,
+      "url": "https://www.youtube.com/embed/KFd_WWP4KiM"
     }
   ]
 }
