@@ -31,6 +31,10 @@ a, a:hover, a:visited, a:active {
   color: inherit;
 }
 
+.about p{
+  font-size: 14px;
+}
+
 .main-image {
   display: flex;
   justify-content: center;
