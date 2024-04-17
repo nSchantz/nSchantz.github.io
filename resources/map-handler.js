@@ -79,7 +79,8 @@
                          </img>
                          </a>`
         var popupId   = `ID: ${marker.id}`
-        var popup = popupData + '<br>' + popupImg + '<br>' + popupId;
+        var popupHint = `Click to see at full resolution`
+        var popup = popupData + '<br>' + popupImg + '<br>' + popupId + `<br>` + popupHint;
 
         var currMarker = L.marker([marker.lat, (marker.long * -1)], {icon: get_icon(marker.tag, type)}).bindPopup(popup, popupOptions);
         markerGroup.push(currMarker);
